@@ -568,8 +568,6 @@ public class InCallScreen extends Activity
         if (DBG) log("onResume()...");
         super.onResume();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         updateSettings();
 
         if (Enable_Landscape_In_Call) {
@@ -577,12 +575,6 @@ public class InCallScreen extends Activity
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
-=======
-        mFlipAction = PhoneUtils.PhoneSettings.flipAction(this);
-
->>>>>>> cm/cm-10.1
-=======
->>>>>>> parent of 436e19f... Flip to mute/dismiss call
         mIsForegroundActivity = true;
         mIsForegroundActivityForProximity = true;
 
