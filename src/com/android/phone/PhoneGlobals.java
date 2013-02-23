@@ -1240,13 +1240,6 @@ public class PhoneGlobals extends ContextWrapper
                     // Phone is either idle, or ringing.  We don't want any
                     // special proximity sensor behavior in either case.
                     if (mProximityWakeLock.isHeld()) {
-                        if (DBG) Log.d(LOG_TAG, "updateProximitySensorMode: releasing...");
-                        // Wait until user has moved the phone away from his head if we are
-                        // releasing due to the phone call ending.
-                        // Qtherwise, turn screen on immediately
-                        int flags =
-                            (screenOnImmediately ? 0 : PowerManager.WAIT_FOR_PROXIMITY_NEGATIVE);
-                        mProximityWakeLock.release(flags);
                         if (mSweep2WakeCapable) {
                             if (mSweep2WakeState != null && setSweep2WakeState(mSweep2WakeState)) {
                                 Log.d(LOG_TAG, "Restored sweep2wake state");
@@ -1254,6 +1247,13 @@ public class PhoneGlobals extends ContextWrapper
                                 Log.d(LOG_TAG, "Failed to restore sweep2wake state");
                             }
                         }
+                        if (DBG) Log.d(LOG_TAG, "updateProximitySensorMode: releasing...");
+                        // Wait until user has moved the phone away from his head if we are
+                        // releasing due to the phone call ending.
+                        // Qtherwise, turn screen on immediately
+                        int flags =
+                            (screenOnImmediately ? 0 : PowerManager.WAIT_FOR_PROXIMITY_NEGATIVE);
+                        mProximityWakeLock.release(flags);
                     } else {
                         if (VDBG) {
                             Log.d(LOG_TAG, "updateProximitySensorMode: lock already released.");
