@@ -1283,14 +1283,8 @@ public class CallNotifier extends Handler
             // Set the "type" to be displayed in the call log (see constants in CallLog.Calls)
             final int callLogType;
             if (c.isIncoming()) {
-                if (cause == Connection.DisconnectCause.INCOMING_MISSED) {
-                    callLogType = Calls.MISSED_TYPE;
-                } else if (cause == Connection.DisconnectCause.INCOMING_REJECTED
-                        && PhoneUtils.PhoneSettings.markRejectedCallsAsMissed(mApplication)) {
-                    callLogType = Calls.MISSED_TYPE;
-                } else {
-                    callLogType = Calls.INCOMING_TYPE;
-                }
+                callLogType = (cause == Connection.DisconnectCause.INCOMING_MISSED ?
+                               Calls.MISSED_TYPE : Calls.INCOMING_TYPE);
             } else {
                 callLogType = Calls.OUTGOING_TYPE;
             }
